@@ -56,6 +56,35 @@
 
   #progress{position:fixed; top:0; left:0; height:2px; width:0%; background:var(--ink); z-index:998; transition:width .08s linear;}
 
+  /* ===== PRELOADER (инициалы при загрузке) ===== */
+  #preloader{
+    position:fixed; inset:0; z-index:9999;
+    background:#ffffff;
+    display:flex; align-items:center; justify-content:center;
+    transition:opacity .75s ease-in-out .1s;
+  }
+  #preloader.hide{opacity:0; pointer-events:none;}
+  #preloader .pl-inner{
+    position:relative; display:flex; align-items:center; justify-content:center;
+    gap:26px;
+  }
+  #preloader .pl-initial{
+    font-family:'Mrs Saint Delafield', 'Brush Script MT', 'Segoe Script', Georgia, serif;
+    font-size:clamp(56px, 12vw, 76px);
+    color:var(--ink);
+    line-height:1;
+    opacity:0;
+  }
+  #preloader .pl-initial.left{animation:pl-fade-left 1.4s ease forwards .2s;}
+  #preloader .pl-initial.right{animation:pl-fade-right 1.4s ease forwards .2s;}
+  #preloader .pl-line{
+    width:1px; height:48px; background:var(--ink); opacity:0;
+    animation:pl-fade-in 1.6s ease forwards .1s;
+  }
+  @keyframes pl-fade-left{ from{opacity:0; transform:translateX(-18px);} to{opacity:1; transform:translateX(0);} }
+  @keyframes pl-fade-right{ from{opacity:0; transform:translateX(18px);} to{opacity:1; transform:translateX(0);} }
+  @keyframes pl-fade-in{ from{opacity:0;} to{opacity:.75;} }
+
   /* photo placeholders */
   .photo-ph{
     background:#ffffff;
@@ -68,16 +97,16 @@
   .photo-ph svg{width:34px; height:34px; margin-bottom:10px; opacity:.5;}
   .photo-ph .ph-inner{display:flex; flex-direction:column; align-items:center;}
   /* Когда вставляете свою фотографию через <img>, она растянется на весь блок и обрежется по контейнеру */
-  .photo-ph img{width:100%; height:100%; object-fit:cover; display:block;}
+  .photo-ph img{width:120%; height:120%; object-fit:cover; display:block;}
 
   /* ===== MUSIC TOGGLE ===== */
   #music-toggle{
-    position:absolute; top:26px; left:26px; z-index:60;
-    display:flex; align-items:center; gap:12px; cursor:pointer;
+    position:fixed; top:20px; left:20px; z-index:900;
+    display:flex; flex-direction:column; align-items:center; gap:8px; cursor:pointer;
     color:var(--ink);
   }
   #music-toggle .circle{
-    width:46px; height:46px; border-radius:50%; border:1px solid currentColor;
+    width:52px; height:52px; border-radius:50%; border:1px solid currentColor;
     display:flex; align-items:center; justify-content:center; flex-shrink:0;
     background:#fff;
     animation: music-breathe 2.6s ease-in-out infinite;
@@ -93,8 +122,11 @@
     from{ transform:rotate(0deg); }
     to{ transform:rotate(360deg); }
   }
-  #music-toggle .circle svg{width:14px; height:14px;}
-  #music-toggle .label{font-size:11px; letter-spacing:.14em; line-height:1.4; text-transform:uppercase;}
+  #music-toggle .circle svg{width:15px; height:15px;}
+  #music-toggle .label{
+    font-size:10px; letter-spacing:.12em; line-height:1.5; text-transform:uppercase;
+    text-align:center;
+  }
 
   /* ===== HERO ===== */
   #hero{
@@ -103,23 +135,28 @@
     position:relative;
   }
   .hero-frame{
-    max-width:420px;
+    max-width:430px;
     margin:0 auto;
     position:relative;
-    min-height:300px;
+    aspect-ratio:3/4;
+    min-height:320px;
     background:#f4f2ee;
     border:1px dashed #d8d4cc;
+    overflow:hidden;
   }
   .hero-frame img{
+    position:absolute;
+    inset:0;
     display:block;
     width:100%;
-    height:auto;
-    object-fit:contain;
+    height:100%;
+    object-fit:cover;
   }
   .hero-frame .photo-ph{width:100%; min-height:300px;}
   @media (min-width:768px){
     .hero-frame{
-      max-width:600px;
+      max-width:1200px;
+      aspect-ratio:16/9;
     }
   }
   .hero-overlay{
@@ -287,6 +324,15 @@
 </head>
 <body>
 
+<!-- ============ PRELOADER ============ -->
+<div id="preloader">
+  <div class="pl-inner">
+    <span class="pl-initial left">Р</span>
+    <span class="pl-line"></span>
+    <span class="pl-initial right">Л</span>
+  </div>
+</div>
+
 <div id="progress"></div>
 
 <!-- ============ HERO ============ -->
@@ -297,13 +343,22 @@
     </div>
     <div class="label">Включить<br>музыку</div>
   </div>
-  <div class="hero-frame">
-    <img src="hero1.jpg" alt="Роман и Лада">
+<div class="hero-frame">
+
+    <picture>
+        <!-- ПК -->
+        <source media="(min-width:768px)" srcset="hero1.jpg">
+
+        <!-- Телефон -->
+        <img src="hero2.jpg" alt="Роман и Лада">
+    </picture>
+
     <div class="hero-overlay">
-      <h1 class="names script">Роман<span class="amp">&amp;</span>Лада</h1>
-      <div class="date script">09.09.26</div>
+        <h1 class="names script">Роман<span class="amp">&amp;</span>Лада</h1>
+        <div class="date script">09.09.26</div>
     </div>
-  </div>
+
+</div>
 </section>
 
 <audio id="bg-music" loop preload="none"><source src="" type="audio/mpeg"></audio>
@@ -340,23 +395,20 @@
 <section id="story">
   <div class="container">
     <div class="story-grid">
-      <div class="photo-ph ph-tall reveal"><div class="ph-inner">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="5" width="18" height="14" rx="1"/><circle cx="9" cy="10" r="2"/><path d="M3 17l5-4 3 2 5-5 5 6"/></svg>
-        Ваше фото
-      </div></div>
-      <div class="photo-ph ph-a reveal delay-1"><div class="ph-inner">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="5" width="18" height="14" rx="1"/><circle cx="9" cy="10" r="2"/><path d="M3 17l5-4 3 2 5-5 5 6"/></svg>
-        Ваше фото
-      </div></div>
+      <div class="photo-ph">
+  <img src="hero2.jpg" alt="Роман и Лада">
+</div>
+      <div class="photo-ph">
+  <img src="hero3.jpg" alt="Роман и Лада">
+</div>
       <div class="story-text reveal delay-2">
         <div class="script">Love Story</div>
         <!-- замените на реальную историю пары -->
         <p>Мы прошли вместе через много ярких моментов, маленьких открытий и больших радостей — и очень рады, что дальше пойдём по этому пути уже мужем и женой.</p>
       </div>
-      <div class="photo-ph ph-b reveal delay-3"><div class="ph-inner">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="5" width="18" height="14" rx="1"/><circle cx="9" cy="10" r="2"/><path d="M3 17l5-4 3 2 5-5 5 6"/></svg>
-        Ваше фото
-      </div></div>
+      <div class="photo-ph">
+  <img src="hero4.jpg" alt="Роман и Лада">
+</div>
     </div>
   </div>
 </section>
@@ -375,7 +427,6 @@
       <div class="tl-item reveal delay-1">
         <div class="time num-serif">10:30</div>
         <div class="title">Регистрация брака</div>
-        <div class="addr">Москва, ул. Малая Ордынка, д. 14, стр. 1</div>
       </div>
       <div class="star">✦</div>
       <div class="tl-item reveal delay-2">
@@ -387,7 +438,6 @@
       <div class="tl-item reveal delay-3">
         <div class="time num-serif">14:00</div>
         <div class="title">Окончание банкета</div>
-        <div class="addr">Москва, Пятницкая ул., 46, стр. 1</div>
       </div>
     </div>
   </div>
@@ -396,14 +446,13 @@
 <!-- ============ LOCATION ============ -->
 <section id="location">
   <div class="container">
-    <div class="photo-ph reveal"><div class="ph-inner">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="5" width="18" height="14" rx="1"/><circle cx="9" cy="10" r="2"/><path d="M3 17l5-4 3 2 5-5 5 6"/></svg>
-      Ваше фото площадки
-    </div></div>
-    <div class="venue-type reveal delay-1">Ресторан</div>
+<div class="photo-ph">
+  <img src="hero5.png" alt="Роман и Лада">
+</div>
+    <div class="venue-type reveal delay-1">Место сборов</div>
     <!-- замените на реальное название площадки -->
-    <div class="venue-name script reveal delay-1">Название площадки</div>
-    <div class="addr reveal delay-2">Москва, Пятницкая ул., 46, стр. 1</div>
+    <div class="venue-name script reveal delay-1">Особняк на Малой Ордынке</div>
+    <div class="addr reveal delay-2">Москва, ул. Малая Ордынка, д. 14, стр. 1</div>
     <a class="btn reveal delay-2" target="_blank" rel="noopener" href="https://yandex.ru/maps/?text=%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C%20%D0%9F%D1%8F%D1%82%D0%BD%D0%B8%D1%86%D0%BA%D0%B0%D1%8F%20%D1%83%D0%BB.%2C%2046%2C%20%D1%81%D1%82%D1%80%201">Показать на карте</a>
   </div>
 </section>
@@ -412,7 +461,7 @@
 <section id="social">
   <div class="container">
     <h2 class="heading script reveal">Пожелания</h2>
-    <p class="reveal delay-1">Мы создали группу, где будет основная информация по торжеству. А также можно будет добавлять фото и видео со свадьбы.<br><br>Давайте поделимся друг с другом счастливыми моментами этого важного дня!</p>
+    <p class="reveal delay-1">Мы создали группу. Там будет основная информация по торжеству. А также можно будет добавлять фото и видео со свадьбы.<br>Давайте делиться друг с другом счастливыми моментами этого важного дня!</p>
     <!-- вставьте свою ссылку -->
     <a class="btn reveal delay-2" target="_blank" rel="noopener" href="#">Открыть группу</a>
   </div>
@@ -467,13 +516,8 @@
           <label class="qlabel">Уточните Ваши предпочтения в алкоголе, выбрав один или несколько вариантов:</label>
           <div class="choice-group">
             <label><input type="checkbox" class="alcohol-cb" value="Красное сухое вино">Красное сухое вино</label>
-            <label><input type="checkbox" class="alcohol-cb" value="Красное п/сл вино">Красное п/сл вино</label>
             <label><input type="checkbox" class="alcohol-cb" value="Белое сухое вино">Белое сухое вино</label>
-            <label><input type="checkbox" class="alcohol-cb" value="Белое п/сл вино">Белое п/сл вино</label>
-            <label><input type="checkbox" class="alcohol-cb" value="Шампанское">Шампанское</label>
-            <label><input type="checkbox" class="alcohol-cb" value="Коньяк">Коньяк</label>
-            <label><input type="checkbox" class="alcohol-cb" value="Водка">Водка</label>
-            <label><input type="checkbox" class="alcohol-cb" value="Виски">Виски</label>
+            <label><input type="checkbox" class="alcohol-cb" value="Игристое вино">Игристое вино</label>
             <label><input type="checkbox" class="alcohol-cb" value="Безалкогольные напитки">Безалкогольные напитки</label>
           </div>
         </div>
@@ -483,14 +527,7 @@
           <div class="choice-group">
             <label><input type="checkbox" class="food-cb" value="Мясо">Мясо</label>
             <label><input type="checkbox" class="food-cb" value="Рыба">Рыба</label>
-            <label><input type="checkbox" class="food-cb" value="Птица">Птица</label>
           </div>
-        </div>
-
-        <div class="field">
-          <label class="qlabel" for="song">Оставьте свой любимый музыкальный трек:</label>
-          <small class="hint">Не обязательно</small>
-          <input type="text" id="song" name="song" placeholder="Perfect - Ed Sheeran">
         </div>
 
         <div class="field">
@@ -534,6 +571,24 @@
   var EMAILJS_TEMPLATE_ID = "ВАШ_TEMPLATE_ID";
   // =========================================================================================
   emailjs.init(EMAILJS_PUBLIC_KEY);
+</script>
+
+<script>
+  // preloader hide
+  (function(){
+    var pre = document.getElementById('preloader');
+    if(!pre) return;
+    document.body.style.overflow = 'hidden';
+    var hidden = false;
+    function hide(){
+      if(hidden) return;
+      hidden = true;
+      pre.classList.add('hide');
+      document.body.style.overflow = '';
+    }
+    window.addEventListener('load', function(){ setTimeout(hide, 1800); });
+    setTimeout(hide, 3200); // аварийное отключение, если load почему-то не сработал
+  })();
 </script>
 
 <script>
@@ -596,7 +651,6 @@
       presence: form.presence.value,
       alcohol: alcohol,
       food: food,
-      song: form.song.value || '—',
       allergy: form.allergy.value || '—'
     };
 
