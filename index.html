@@ -97,7 +97,7 @@
   .photo-ph svg{width:34px; height:34px; margin-bottom:10px; opacity:.5;}
   .photo-ph .ph-inner{display:flex; flex-direction:column; align-items:center;}
   /* Когда вставляете свою фотографию через <img>, она растянется на весь блок и обрежется по контейнеру */
-  .photo-ph img{width:120%; height:120%; object-fit:cover; display:block;}
+  .photo-ph img{width:100%; height:100%; object-fit:cover; display:block;}
 
   /* ===== MUSIC TOGGLE ===== */
   #music-toggle{
@@ -155,7 +155,7 @@
     object-fit:cover;
     display:block;
 }
-  .hero-frame .photo-ph{width:100%; min-height:300px;}
+  .hero-frame .photo-ph{width:100%; min-height:300px;border:1px dashed #d8d4cc;}
   @media (min-width:768px){
     .hero-frame{
       max-width:1200px;
@@ -398,20 +398,23 @@
 <section id="story">
   <div class="container">
     <div class="story-grid">
-      <div class="photo-ph">
-  <img src="hero2.jpg" alt="Роман и Лада">
-</div>
-      <div class="photo-ph">
-  <img src="hero3.jpg" alt="Роман и Лада">
-</div>
+      <div class="photo-ph ph-tall reveal"><div class="ph-inner">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="5" width="18" height="14" rx="1"/><circle cx="9" cy="10" r="2"/><path d="M3 17l5-4 3 2 5-5 5 6"/></svg>
+        Ваше фото
+      </div></div>
+      <div class="photo-ph ph-a reveal delay-1"><div class="ph-inner">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="5" width="18" height="14" rx="1"/><circle cx="9" cy="10" r="2"/><path d="M3 17l5-4 3 2 5-5 5 6"/></svg>
+        Ваше фото
+      </div></div>
       <div class="story-text reveal delay-2">
         <div class="script">Love Story</div>
         <!-- замените на реальную историю пары -->
         <p>Мы прошли вместе через много ярких моментов, маленьких открытий и больших радостей — и очень рады, что дальше пойдём по этому пути уже мужем и женой.</p>
       </div>
-      <div class="photo-ph">
-  <img src="hero4.jpg" alt="Роман и Лада">
-</div>
+      <div class="photo-ph ph-b reveal delay-3"><div class="ph-inner">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="5" width="18" height="14" rx="1"/><circle cx="9" cy="10" r="2"/><path d="M3 17l5-4 3 2 5-5 5 6"/></svg>
+        Ваше фото
+      </div></div>
     </div>
   </div>
 </section>
