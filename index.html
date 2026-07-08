@@ -8,6 +8,14 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Mrs+Saint+Delafield&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
+  /* Liana Regular */
+  @font-face{
+    font-family:'Liana';
+    src:url('liana.ttf') format('truetype');
+    font-weight:400;
+    font-style:normal;
+    font-display:swap;
+  }
   :root{
     --bg:#FFFFFF;
     --ink:#232323;
@@ -30,8 +38,8 @@
     overflow-x:hidden;
   }
   .script{
-    font-family:'Mrs Saint Delafield', 'Brush Script MT', 'Segoe Script', Georgia, serif;
-    font-style:italic;
+    font-family:'Liana', 'Mrs Saint Delafield', 'Brush Script MT', 'Segoe Script', Georgia, serif;
+    font-style:normal;
     font-weight:400;
     color:var(--ink);
     line-height:1.15;
@@ -69,7 +77,7 @@
     gap:26px;
   }
   #preloader .pl-initial{
-    font-family:'Mrs Saint Delafield', 'Brush Script MT', 'Segoe Script', Georgia, serif;
+    font-family:'Liana', 'Mrs Saint Delafield', 'Brush Script MT', 'Segoe Script', Georgia, serif;
     font-size:clamp(56px, 12vw, 76px);
     color:var(--ink);
     line-height:1;
@@ -162,6 +170,17 @@
       aspect-ratio:16/9;
     }
   }
+  @media (max-width:767px){
+    #hero{
+      padding:0;
+    }
+    .hero-frame{
+      max-width:100%;
+      aspect-ratio:auto;
+      height:100vh;
+      height:100svh;
+    }
+  }
   .hero-overlay{
     position:absolute; left:0; right:0; bottom:0; z-index:5;
     padding:0 30px 30px;
@@ -251,7 +270,7 @@
   #countdown .script{color:#fff; font-size:clamp(44px,7vw,60px); margin-bottom:30px;}
   .cd-timer{display:flex; gap:26px; justify-content:center; flex-wrap:wrap;}
   .cd-timer .box{text-align:center;}
-  .cd-timer .num{font-family:'Cormorant Garamond', serif; font-weight:400; font-size:clamp(40px,7vw,62px); display:block;}
+  .cd-timer .num{font-family:'Liana', 'Cormorant Garamond', serif; font-weight:400; font-size:clamp(40px,7vw,62px); display:block;}
   .cd-timer .label{font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:#d8d4c9;}
   .cd-timer .sep{font-family:'Cormorant Garamond', serif; font-size:clamp(40px,7vw,62px); color:#d8d4c9; align-self:flex-start;}
   .cd-buttons{margin-top:50px; display:flex; gap:18px; justify-content:center; flex-wrap:wrap;}
@@ -398,23 +417,14 @@
 <section id="story">
   <div class="container">
     <div class="story-grid">
-      <div class="photo-ph ph-tall reveal"><div class="ph-inner">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="5" width="18" height="14" rx="1"/><circle cx="9" cy="10" r="2"/><path d="M3 17l5-4 3 2 5-5 5 6"/></svg>
-        Ваше фото
-      </div></div>
-      <div class="photo-ph ph-a reveal delay-1"><div class="ph-inner">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="5" width="18" height="14" rx="1"/><circle cx="9" cy="10" r="2"/><path d="M3 17l5-4 3 2 5-5 5 6"/></svg>
-        Ваше фото
-      </div></div>
+      <div class="photo-ph ph-tall reveal"><img src="story1.jpg" alt="Роман и Лада"></div>
+      <div class="photo-ph ph-a reveal delay-1"><img src="story2.jpg" alt="Роман и Лада"></div>
       <div class="story-text reveal delay-2">
         <div class="script">Love Story</div>
         <!-- замените на реальную историю пары -->
         <p>Мы прошли вместе через много ярких моментов, маленьких открытий и больших радостей — и очень рады, что дальше пойдём по этому пути уже мужем и женой.</p>
       </div>
-      <div class="photo-ph ph-b reveal delay-3"><div class="ph-inner">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="5" width="18" height="14" rx="1"/><circle cx="9" cy="10" r="2"/><path d="M3 17l5-4 3 2 5-5 5 6"/></svg>
-        Ваше фото
-      </div></div>
+      <div class="photo-ph ph-b reveal delay-3"><img src="story3.jpg" alt="Роман и Лада"></div>
     </div>
   </div>
 </section>
@@ -475,7 +485,7 @@
 
 <!-- ============ COUNTDOWN BANNER ============ -->
 <section id="countdown">
-  <div class="photo-ph"><div class="ph-inner">Ваше фото</div></div>
+  <div class="photo-ph"><img src="countdown1.jpg" alt="Роман и Лада"></div>
   <div class="cd-inner">
     <div class="script">До праздника</div>
     <div class="cd-timer">
@@ -556,8 +566,8 @@
 <footer>
   <div class="container">
     <div class="foot-grid">
-      <div class="photo-ph"><div class="ph-inner">Ваше фото</div></div>
-      <div class="photo-ph"><div class="ph-inner">Ваше фото</div></div>
+      <div class="photo-ph"><img src="footer1.jpg" alt="Роман и Лада"></div>
+      <div class="photo-ph"><img src="footer2.jpg" alt="Роман и Лада"></div>
     </div>
     <div class="script">С нетерпением<br>ждём вас!</div>
     <div class="soc-links">
