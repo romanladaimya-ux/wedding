@@ -623,8 +623,8 @@
       pre.classList.add('hide');
       document.body.style.overflow = '';
     }
-    window.addEventListener('load', function(){ setTimeout(hide, 300); });
-    setTimeout(hide, 1800); // аварийное отключение, если load почему-то не сработал
+    window.addEventListener('load', function(){ setTimeout(hide, 1800); });
+    setTimeout(hide, 3200); // аварийное отключение, если load почему-то не сработал
   })();
 </script>
 
