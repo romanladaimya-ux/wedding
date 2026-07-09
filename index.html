@@ -6,7 +6,7 @@
 <title>Роман &amp; Лада — 9 сентября 2026</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Mrs+Saint+Delafield&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Mrs+Saint+Delafield&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   /* Liana Regular */
   @font-face{
@@ -393,7 +393,7 @@
         <source media="(min-width:768px)" srcset="hero1.jpg">
 
         <!-- Телефон -->
-        <img src="hero2.jpg" alt="Роман и Лада">
+        <img src="hero2.jpg" alt="Роман и Лада" fetchpriority="high" decoding="async">
     </picture>
 
     <div class="hero-overlay">
@@ -438,14 +438,14 @@
 <section id="story">
   <div class="container">
     <div class="story-grid">
-      <div class="photo-ph ph-tall reveal"><img src="story1.jpg" alt="Роман и Лада"></div>
-      <div class="photo-ph ph-a reveal delay-1"><img src="story2.jpg" alt="Роман и Лада"></div>
+      <div class="photo-ph ph-tall reveal"><img src="story1.jpg" alt="Роман и Лада" loading="lazy" decoding="async"></div>
+      <div class="photo-ph ph-a reveal delay-1"><img src="story2.jpg" alt="Роман и Лада" loading="lazy" decoding="async"></div>
       <div class="story-text reveal delay-2">
         <div class="script">Love Story</div>
         <!-- замените на реальную историю пары -->
         <p>Мы прошли вместе через много ярких моментов, маленьких открытий и больших радостей — и очень рады, что дальше пойдём по этому пути уже мужем и женой.</p>
       </div>
-      <div class="photo-ph ph-b reveal delay-3"><img src="story3.jpg" alt="Роман и Лада"></div>
+      <div class="photo-ph ph-b reveal delay-3"><img src="story3.jpg" alt="Роман и Лада" loading="lazy" decoding="async"></div>
     </div>
   </div>
 </section>
@@ -484,7 +484,7 @@
 <section id="location">
   <div class="container">
 <div class="photo-ph">
-  <img src="hero5.jpg" alt="Роман и Лада">
+  <img src="hero5.jpg" alt="Роман и Лада" loading="lazy" decoding="async">
 </div>
     <div class="venue-type reveal delay-1">Место сборов</div>
     <!-- замените на реальное название площадки -->
@@ -507,7 +507,7 @@
 <!-- ============ COUNTDOWN BANNER ============ -->
 <section id="countdown">
   <div class="cd-card">
-    <div class="photo-ph"><img src="countdown1.jpg" alt="Роман и Лада"></div>
+    <div class="photo-ph"><img src="countdown1.jpg" alt="Роман и Лада" loading="lazy" decoding="async"></div>
     <div class="cd-inner">
       <div class="script">До праздника</div>
       <div class="cd-timer">
@@ -589,8 +589,8 @@
 <footer>
   <div class="container">
     <div class="foot-grid">
-      <div class="photo-ph"><img src="footer1.jpg" alt="Роман и Лада"></div>
-      <div class="photo-ph"><img src="footer2.jpg" alt="Роман и Лада"></div>
+      <div class="photo-ph"><img src="footer1.jpg" alt="Роман и Лада" loading="lazy" decoding="async"></div>
+      <div class="photo-ph"><img src="footer2.jpg" alt="Роман и Лада" loading="lazy" decoding="async"></div>
     </div>
     <div class="script">С нетерпением<br>ждём вас!</div>
     </div>
@@ -598,14 +598,16 @@
   </div>
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js" defer></script>
 <script>
   // ==== НАСТРОЙКИ EMAILJS — замените на свои значения из личного кабинета emailjs.com ====
   var EMAILJS_PUBLIC_KEY  = "ВАШ_PUBLIC_KEY";
   var EMAILJS_SERVICE_ID  = "ВАШ_SERVICE_ID";
   var EMAILJS_TEMPLATE_ID = "ВАШ_TEMPLATE_ID";
   // =========================================================================================
-  emailjs.init(EMAILJS_PUBLIC_KEY);
+  document.addEventListener('DOMContentLoaded', function(){
+    if (window.emailjs) emailjs.init(EMAILJS_PUBLIC_KEY);
+  });
 </script>
 
 <script>
@@ -621,8 +623,8 @@
       pre.classList.add('hide');
       document.body.style.overflow = '';
     }
-    window.addEventListener('load', function(){ setTimeout(hide, 1800); });
-    setTimeout(hide, 3200); // аварийное отключение, если load почему-то не сработал
+    window.addEventListener('load', function(){ setTimeout(hide, 300); });
+    setTimeout(hide, 1800); // аварийное отключение, если load почему-то не сработал
   })();
 </script>
 
