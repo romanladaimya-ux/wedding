@@ -183,11 +183,12 @@
     }
   }
   .hero-overlay{
-    position:absolute; left:0; right:0; bottom:0; z-index:5;
-    padding:0 30px 30px;
+    position:absolute; top:0; right:0; left:auto; bottom:auto; z-index:5;
+    padding:30px 30px 0;
     color:var(--ink);
+    text-align:right;
   }
-  .hero-overlay .names{font-size:clamp(38px, 6vw, 58px); text-align:left;}
+  .hero-overlay .names{font-size:clamp(38px, 6vw, 58px); text-align:right;}
   .hero-overlay .amp{padding:0 6px;}
   .hero-overlay .date{font-size:clamp(18px, 2.6vw, 24px); margin-top:4px;}
 
@@ -349,7 +350,7 @@
     footer .foot-grid .photo-ph{aspect-ratio:3/4;}
     #location .photo-ph{aspect-ratio:3/2;}
     #location .venue-name{font-size:clamp(34px,10vw,80px);}
-    .hero-overlay{padding:0 22px 40px;}
+    .hero-overlay{padding:30px 22px 0;}
     #countdown{padding:60px 20px;}
     #countdown .cd-inner{padding:16px;}
     .cd-timer{gap:6px;}
