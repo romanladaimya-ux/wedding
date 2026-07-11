@@ -614,6 +614,20 @@
   });
 </script>
 
+ // ждём загрузки шрифта Liana перед показом инициалов
+(function(){
+  if(document.fonts && document.fonts.ready){
+    document.fonts.ready.then(function(){
+      document.querySelectorAll('.pl-initial').forEach(function(el){
+        el.classList.add('font-ready');
+      });
+    });
+  } else {
+    document.querySelectorAll('.pl-initial').forEach(function(el){
+      el.classList.add('font-ready');
+    });
+  }
+})(); 
 
   // preloader hide
   (function(){
