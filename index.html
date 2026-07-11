@@ -15,7 +15,7 @@
     src:url('liana.ttf') format('truetype');
     font-weight:400;
     font-style:normal;
-    font-display:swap;
+    font-display:block;
   }
   :root{
     --bg:#FFFFFF;
@@ -75,7 +75,7 @@
   #preloader.hide{opacity:0; pointer-events:none;}
   #preloader .pl-inner{
     position:relative; display:flex; align-items:center; justify-content:center;
-    gap:34px;
+    gap:26px;
   }
   #preloader .pl-initial{
     font-family:'Liana', 'Mrs Saint Delafield', 'Brush Script MT', 'Segoe Script', Georgia, serif;
@@ -83,18 +83,15 @@
     color:var(--ink);
     line-height:1;
     opacity:0;
-    overflow:visible;
   }
-  #preloader .pl-initial.left{padding-right:6px;}
-  #preloader .pl-initial.right{padding-left:6px;}
-  #preloader .pl-initial.left.{animation:pl-fade-left 2.2s ease forwards .1s;}
-  #preloader .pl-initial.right.{animation:pl-fade-right 2.2s ease forwards .1s;}
+  #preloader .pl-initial.left{animation:pl-fade-left 1.4s ease forwards .1s;}
+  #preloader .pl-initial.right{animation:pl-fade-right 1.4s ease forwards .1s;}
   #preloader .pl-line{
     width:1px; height:48px; background:var(--ink); opacity:0;
-    animation:pl-fade-in 2.2s ease forwards .1s;
+    animation:pl-fade-in 1.6s ease forwards .1s;
   }
-  @keyframes pl-fade-left{ from{opacity:0; transform:translateX(-40px);} to{opacity:1; transform:translateX(0);} }
-  @keyframes pl-fade-right{ from{opacity:0; transform:translateX(40px);} to{opacity:1; transform:translateX(0);} }
+  @keyframes pl-fade-left{ from{opacity:0; transform:translateX(-18px);} to{opacity:1; transform:translateX(0);} }
+  @keyframes pl-fade-right{ from{opacity:0; transform:translateX(18px);} to{opacity:1; transform:translateX(0);} }
   @keyframes pl-fade-in{ from{opacity:0;} to{opacity:.75;} }
 
   /* photo placeholders */
@@ -614,20 +611,22 @@
   });
 </script>
 
- // ждём загрузки шрифта Liana перед показом инициалов
-(function(){
-  if(document.fonts && document.fonts.ready){
-    document.fonts.ready.then(function(){
+<script>
+  // ждём загрузки шрифта Liana перед показом инициалов
+  (function(){
+    if(document.fonts && document.fonts.ready){
+      document.fonts.ready.then(function(){
+        document.querySelectorAll('.pl-initial').forEach(function(el){
+          el.classList.add('font-ready');
+        });
+      });
+    } else {
+      // fallback для старых браузеров без Font Loading API
       document.querySelectorAll('.pl-initial').forEach(function(el){
         el.classList.add('font-ready');
       });
-    });
-  } else {
-    document.querySelectorAll('.pl-initial').forEach(function(el){
-      el.classList.add('font-ready');
-    });
-  }
-})(); 
+    }
+  })();
 
   // preloader hide
   (function(){
