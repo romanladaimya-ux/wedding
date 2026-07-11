@@ -94,8 +94,8 @@
     width:1px; height:48px; background:var(--ink); opacity:0;
     animation:pl-fade-in 1.6s ease forwards .1s;
   }
-  @keyframes pl-fade-left{ from{opacity:0; transform:translateX(-18px);} to{opacity:1; transform:translateX(0);} }
-  @keyframes pl-fade-right{ from{opacity:0; transform:translateX(18px);} to{opacity:1; transform:translateX(0);} }
+  @keyframes pl-fade-left{ from{opacity:0; transform:translateX(-18px) translateZ(0);} to{opacity:1; transform:translateX(0) translateZ(0);} }
+  @keyframes pl-fade-right{ from{opacity:0; transform:translateX(18px) translateZ(0);} to{opacity:1; transform:translateX(0) translateZ(0);} }
   @keyframes pl-fade-in{ from{opacity:0;} to{opacity:.75;} }
 
   /* photo placeholders */
@@ -614,23 +614,6 @@
     if (window.emailjs) emailjs.init(EMAILJS_PUBLIC_KEY);
   });
 </script>
-
-<script>
-  // ждём загрузки шрифта Liana перед показом инициалов
-  (function(){
-    if(document.fonts && document.fonts.ready){
-      document.fonts.ready.then(function(){
-        document.querySelectorAll('.pl-initial').forEach(function(el){
-          el.classList.add('font-ready');
-        });
-      });
-    } else {
-      // fallback для старых браузеров без Font Loading API
-      document.querySelectorAll('.pl-initial').forEach(function(el){
-        el.classList.add('font-ready');
-      });
-    }
-  })();
 
   // preloader hide
   (function(){
