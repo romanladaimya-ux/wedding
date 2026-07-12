@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Роман &amp; Лада — 9 сентября 2026</title>
-<link rel="preload" href="liana.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="liana.ttf" as="font" type="font/ttf" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Mrs+Saint+Delafield&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -12,7 +12,7 @@
   /* Liana Regular */
   @font-face{
     font-family:'Liana';
-    src:url('liana.woff2') format('woff2');
+    src:url('liana.ttf') format('truetype');
     font-weight:400;
     font-style:normal;
     font-display:block;
@@ -84,9 +84,9 @@
     line-height:1;
     opacity:0;
   }
-  .fonts-loaded .pl-initial.left{animation:pl-fade-left 1.4s ease forwards;}
-  .fonts-loaded .pl-initial.right{animation:pl-fade-right 1.4s ease forwards;}
-  .fonts-loaded .pl-line{
+  #preloader .pl-initial.left{animation:pl-fade-left 1.4s ease forwards .1s;}
+  #preloader .pl-initial.right{animation:pl-fade-right 1.4s ease forwards .1s;}
+  #preloader .pl-line{
     width:1px; height:48px; background:var(--ink); opacity:0;
     margin-left:14px;
     animation:pl-fade-in 1.6s ease forwards .1s;
@@ -617,19 +617,20 @@
 
 <script>
   // ждём загрузки шрифта Liana перед показом инициалов
-  (function () {
-
-    function startAnimation() {
-        document.documentElement.classList.add("fonts-loaded");
-    }
-
-    if (document.fonts) {
-        document.fonts.load('72px "Liana"').then(startAnimation);
+  (function(){
+    if(document.fonts && document.fonts.ready){
+      document.fonts.ready.then(function(){
+        document.querySelectorAll('.pl-initial').forEach(function(el){
+          el.classList.add('font-ready');
+        });
+      });
     } else {
-        startAnimation();
+      // fallback для старых браузеров без Font Loading API
+      document.querySelectorAll('.pl-initial').forEach(function(el){
+        el.classList.add('font-ready');
+      });
     }
-
-})();
+  })();
 
   // preloader hide
   (function(){
