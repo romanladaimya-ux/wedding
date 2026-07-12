@@ -84,9 +84,9 @@
     line-height:1;
     opacity:0;
   }
-  #preloader .pl-initial.left{animation:pl-fade-left 1.4s ease forwards .1s;}
-  #preloader .pl-initial.right{animation:pl-fade-right 1.4s ease forwards .1s;}
-  #preloader .pl-line{
+  .fonts-loaded .pl-initial.left{animation:pl-fade-left 1.4s ease forwards;}
+  .fonts-loaded .pl-initial.right{animation:pl-fade-right 1.4s ease forwards;}
+  .fonts-loaded .pl-line{
     width:1px; height:48px; background:var(--ink); opacity:0;
     margin-left:14px;
     animation:pl-fade-in 1.6s ease forwards .1s;
@@ -617,20 +617,19 @@
 
 <script>
   // ждём загрузки шрифта Liana перед показом инициалов
-  (function(){
-    if(document.fonts && document.fonts.ready){
-      document.fonts.ready.then(function(){
-        document.querySelectorAll('.pl-initial').forEach(function(el){
-          el.classList.add('font-ready');
-        });
-      });
-    } else {
-      // fallback для старых браузеров без Font Loading API
-      document.querySelectorAll('.pl-initial').forEach(function(el){
-        el.classList.add('font-ready');
-      });
+  (function () {
+
+    function startAnimation() {
+        document.documentElement.classList.add("fonts-loaded");
     }
-  })();
+
+    if (document.fonts) {
+        document.fonts.load('72px "Liana"').then(startAnimation);
+    } else {
+        startAnimation();
+    }
+
+})();
 
   // preloader hide
   (function(){
