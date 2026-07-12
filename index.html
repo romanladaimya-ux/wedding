@@ -78,14 +78,16 @@
     gap:26px;
   }
   #preloader .pl-initial{
-    font-family:'Liana', 'Mrs Saint Delafield', 'Brush Script MT', 'Segoe Script', Georgia, serif;
-    font-size:clamp(56px, 12vw, 76px);
+    display:block;
+    height:clamp(56px, 12vw, 76px);
+    width:auto;
+    fill:var(--ink);
     color:var(--ink);
-    line-height:1;
     opacity:0;
+    overflow:visible;
   }
-  #preloader .pl-initial.left{animation:pl-fade-left 1.4s ease forwards .1s;}
-  #preloader .pl-initial.right{animation:pl-fade-right 1.4s ease forwards .1s;}
+  #preloader .pl-initial.left{aspect-ratio:1406/1112; animation:pl-fade-left 1.4s ease forwards .1s;}
+  #preloader .pl-initial.right{aspect-ratio:1462/775.35; animation:pl-fade-right 1.4s ease forwards .1s;}
   #preloader .pl-line{
     width:1px; height:48px; background:var(--ink); opacity:0;
     margin-left:14px;
@@ -375,9 +377,13 @@
 <!-- ============ PRELOADER ============ -->
 <div id="preloader">
   <div class="pl-inner">
-    <span class="pl-initial left">Р</span>
+    <svg class="pl-initial left" viewBox="-123 -1071 1406 1112" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+      <g transform="scale(1,-1)"><path d="M1283 945Q1283 851 1124 721Q1014 629 832 564Q656 499 508 499Q466 499 436.0 499.0Q406 499 386 501Q346 441 295.0 370.0Q244 299 180 215Q144 168 103.0 124.5Q62 81 13 37Q-76 -41 -101 -41Q-121 -41 -123 -15Q-123 -7 -113 10Q-105 23 -92 25Q-83 25 -77 20Q-74 17 -64 15Q-32 15 152 238Q240 345 290.0 411.0Q340 477 355 506Q244 525 171 555Q152 563 150 583Q150 599 180 599Q198 599 264 579Q342 558 380 550Q444 642 515.5 721.0Q587 800 668 870Q900 1071 1100 1071Q1186 1071 1233 1037Q1258 1020 1269.5 997.5Q1281 975 1283 945ZM1233 912Q1236 960 1188 994Q1141 1025 1067 1028Q767 1028 410 542H531Q658 542 823 596Q992 650 1104 730Q1228 820 1233 912Z"/></g>
+    </svg>
     <span class="pl-line"></span>
-    <span class="pl-initial right">Л</span>
+    <svg class="pl-initial right" viewBox="30 -750 1462 775.35" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+      <g transform="scale(1,-1)"><path d="M518 113Q434 55 354.0 19.0Q274 -17 199 -17Q126 -17 78 19Q54 37 43.0 59.5Q32 82 30 111Q30 221 165 331Q295 435 407 435Q421 435 439.0 427.5Q457 420 459 404Q459 387 443.0 372.5Q427 358 410 357Q404 385 397.5 394.0Q391 403 374 404Q327 408 262.5 378.5Q198 349 127 277Q101 252 87.5 216.5Q74 181 79 144Q87 82 121.0 52.0Q155 22 233 22Q255 22 284.0 30.0Q313 38 346.0 52.0Q379 66 414.0 84.5Q449 103 483 124Q511 140 541.0 164.5Q571 189 603.5 218.0Q636 247 671.5 279.5Q707 312 745 344Q794 385 833.0 417.5Q872 450 910 483Q1004 560 1079.0 626.0Q1154 692 1214 750Q1228 750 1229 739Q900 445 898 218Q898 154 931.5 106.0Q965 58 1022.0 33.5Q1079 9 1153.5 12.0Q1228 15 1309 52Q1337 65 1356.5 76.5Q1376 88 1394.0 101.5Q1412 115 1431.5 132.0Q1451 149 1479 173L1492 169Q1434 114 1385.0 76.0Q1336 38 1289.5 15.0Q1243 -8 1196.0 -17.5Q1149 -27 1095 -25Q1040 -23 996.0 -9.0Q952 5 918 36Q890 61 874.0 93.5Q858 126 852.5 163.0Q847 200 852.5 240.5Q858 281 874 321Q896 379 961 483Q914 446 849.0 386.5Q784 327 684 244Q642 207 600.5 174.0Q559 141 518 113Z"/></g>
+    </svg>
   </div>
 </div>
 
@@ -616,22 +622,6 @@
 </script>
 
 <script>
-  // ждём загрузки шрифта Liana перед показом инициалов
-  (function(){
-    if(document.fonts && document.fonts.ready){
-      document.fonts.ready.then(function(){
-        document.querySelectorAll('.pl-initial').forEach(function(el){
-          el.classList.add('font-ready');
-        });
-      });
-    } else {
-      // fallback для старых браузеров без Font Loading API
-      document.querySelectorAll('.pl-initial').forEach(function(el){
-        el.classList.add('font-ready');
-      });
-    }
-  })();
-
   // preloader hide
   (function(){
     var pre = document.getElementById('preloader');
