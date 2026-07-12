@@ -618,23 +618,6 @@
 </script>
 
 <script>
-  // ждём загрузки шрифта Liana перед показом инициалов
-  (function(){
-    if(document.fonts && document.fonts.ready){
-      document.fonts.ready.then(function(){
-        document.querySelectorAll('.pl-initial').forEach(function(el){
-          el.classList.add('font-ready');
-        });
-      });
-    } else {
-      // fallback для старых браузеров без Font Loading API
-      document.querySelectorAll('.pl-initial').forEach(function(el){
-        el.classList.add('font-ready');
-      });
-    }
-  })();
-
-<script>
   // показываем инициалы только после короткой паузы, чтобы шрифт успел отрисоваться
   (function(){
     setTimeout(function(){
